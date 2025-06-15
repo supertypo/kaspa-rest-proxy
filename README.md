@@ -1,5 +1,7 @@
 # kaspa-rest-proxy
 
+REST to Kaspad wRPC Proxy
+
 ## Getting started
 
 ### Pre-packaged
@@ -30,4 +32,4 @@ Run application
 ```shell
 gunicorn --preload --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:15110 --workers=2 --timeout=120 kaspa_rest_proxy.server:app -- -s ws://localhost:17110
 ```
-Append --help at the end for more information
+Replace 'ws://localhost:17110' with your node url. Append --help at the end for more information
