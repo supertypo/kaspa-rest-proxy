@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "kaspa-rest-proxy"
+version = "0.0.0"
+description = "REST to Kaspad wRPC Proxy"
+authors = ["supertypo <suprtypo@pm.me>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "kaspa_rest_proxy" }]
+
+[tool.poetry.dependencies]
+python = "~3.12"
+gunicorn = "23.0.0"
+uvicorn = "0.34.3"
+fastapi = "0.115.12"
+starlette = "0.46.2"
+colorlog = "6.9.0"
+kaspa = "=1.0.1"
+
+[tool.poetry.group.dev.dependencies]
+poetry-core = "2.1.3"
+ruff = "0.11.13"
+
+[tool.ruff]
+line-length=120
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
