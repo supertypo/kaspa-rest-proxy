@@ -37,5 +37,5 @@ USER 13337:13337
 ARG VERSION
 ENV VERSION=$VERSION
 
-ENTRYPOINT ["gunicorn", "--preload", "--worker-class=uvicorn.workers.UvicornWorker", "--bind=0.0.0.0:15110", "--workers=2", "--timeout=120", "kaspa_rest_proxy.server:app", "--"]
+ENTRYPOINT ["gunicorn", "--preload", "--worker-class=uvicorn.workers.UvicornWorker", "--bind=0.0.0.0:15110", "--workers=2", "--timeout=120", "kaspa_rest_proxy:app", "--"]
 CMD []
