@@ -1,19 +1,20 @@
-from fastapi import APIRouter, HTTPException
-
-
 import logging
+from asyncio import wait_for
+
+from fastapi import APIRouter
+
+from kaspa_rest_proxy.kaspad.kaspad_rpc_client import kaspad_rpc_client
 
 _logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
 
-@router.get("/shutdown", deprecated=True)
+@router.get("/shutdown")
 async def shutdown():
     """
     Instructs this node to shut down
-
-    **Note:** This endpoint is not yet implemented.
     """
     _logger.debug("shutdown")
-    raise HTTPException(status_code=501, detail="Not implemented")
+    rpc_client = await kaspad_rpc_client()
+    return await wait_for(rpc_client.shutdown(), 10)

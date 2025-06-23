@@ -12,7 +12,7 @@ router = APIRouter()
 
 
 @router.get("/get_coin_supply")
-async def get_coinsupply():
+async def get_coin_supply():
     """
     Get current issuance supply
     """
