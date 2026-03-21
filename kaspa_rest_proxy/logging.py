@@ -17,24 +17,27 @@ LOG_LEVELS = {
 }
 
 
+_COLOR_FMT = "%(asctime)s [%(log_color)s%(levelname)-8s%(reset)s] %(name)-30.30s - %(message)s"
+_PLAIN_FMT = "%(asctime)s [%(levelname)-8s] %(name)-30.30s - %(message)s"
+_LOG_COLORS = {
+    "DEBUG": "cyan",
+    "INFO": "green",
+    "WARNING": "yellow",
+    "ERROR": "red",
+    "CRITICAL": "bold_red",
+}
+
+
+def make_formatter(no_color=False):
+    if not no_color and _has_colorlog:
+        return ColoredFormatter(fmt=_COLOR_FMT, log_colors=_LOG_COLORS, force_color=True)
+    return logging.Formatter(fmt=_PLAIN_FMT)
+
+
 def setup_logging():
     log_level = LOG_LEVELS[args.log_level]
     handler = logging.StreamHandler()
-
-    if not args.log_no_color and _has_colorlog:
-        formatter = ColoredFormatter(
-            fmt="%(asctime)s [%(log_color)s%(levelname)-8s%(reset)s] %(name)-30.30s - %(message)s",
-            log_colors={
-                "DEBUG": "cyan",
-                "INFO": "green",
-                "WARNING": "yellow",
-                "ERROR": "red",
-                "CRITICAL": "bold_red",
-            },
-            force_color=True,
-        )
-    else:
-        formatter = logging.Formatter(fmt="%(asctime)s [%(levelname)-8s] %(name)-30.30s - %(message)s")
+    formatter = make_formatter(no_color=args.log_no_color)
 
     handler.setFormatter(formatter)
 
